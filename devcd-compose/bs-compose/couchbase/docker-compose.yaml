@@ -1,0 +1,26 @@
+version: "3"
+
+services: 
+  coubase-server:
+    image: couchbase
+    container_name: couchbase
+    mem_limit: 6G
+    ports:
+      - "8091-8096:8091-8096"
+      - "11210-11211:11210-11211"
+    volumes:
+      - type: volume
+        source: couchbase_data
+        target: /opt/couchbase/var
+    networks:
+      - ms-net 
+
+networks:
+  ms-net:
+    external: true
+    name: ${MS_NET}
+
+volumes:
+  couchbase_data:
+    external: true
+    name: ${CB_DATA_VOL}

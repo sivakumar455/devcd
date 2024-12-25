@@ -1,0 +1,33 @@
+# Only needed to test through docker images
+
+server:
+  port: 8443
+
+management:
+  server:
+    port: 8081
+
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 127.0.0.1:9092
+          zkNodes: 127.0.0.1:2181
+          headers:
+            - "X-B3-TraceId"
+            - "X-B3-SpanId"
+            - "X-B3-Sampled"
+            - "X-B3-ParentSpanId"           
+      enabled: true
+  zipkin:
+    enabled: false
+
+logging:
+  level:
+    org:
+      apache:
+        http:
+          wire: WARN
+        kafka: WARN

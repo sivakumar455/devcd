@@ -1,0 +1,16 @@
+
+composeBs:
+  - "/kafka/docker-compose.yaml"
+  - "/couchbase/docker-compose.yaml"
+
+composeMs:
+  - "/order-service/docker-compose.yaml"
+  - "/product-service/docker-compose.yaml"
+  - "/user-service/docker-compose.yaml"
+
+composeTestBs:
+  - "/kafka/docker-compose.yaml"
+
+composeTestMs:
+  - "/order-service/docker-compose.yaml"
+

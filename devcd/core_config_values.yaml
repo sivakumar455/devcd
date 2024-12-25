@@ -1,0 +1,14 @@
+
+# Installation ENV
+CONTAINER_RT_ENGINE: 'docker' # docker/podman
+RUN_MODE: 'helm' # helm/compose
+FEATURE_CD: demo
+
+#### DO NOT CHANGE ANYTHING BELOW ####
+
+# Docker helm/compose home paths
+MS_COMPOSE_HOME: "./devcd-compose/ms-compose"
+BS_COMPOSE_HOME: "./devcd-compose/bs-compose"
+MS_HELM_HOME: "./devcd-helm/ms-helm"
+BS_HELM_HOME: "./devcd-helm/bs-helm"
+DEVCD_RUNTIME: "./devcd-runtime"

@@ -1,0 +1,51 @@
+version: "3"
+
+services: 
+
+  kafka-server:
+    image: bitnami/kafka:3.7
+    container_name: kafka
+    mem_limit: 3G
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    volumes:
+      - type: volume
+        source: kafka_data
+        target: /bitnami
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,INTERNAL://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092,INTERNAL://kafka:29092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    networks:
+      - ms-net  
+
+  kafka-ui:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    mem_limit: ${MEM_SZ_SMALL}
+    ports:
+      - "9000:9000"
+    environment:
+      - KAFKA_BROKERCONNECT=kafka:29092
+    networks:
+      - ms-net
+    depends_on:
+      - "kafka-server"  
+
+networks:
+  ms-net:
+    external: true
+    name: ${MS_NET}
+
+volumes:
+  kafka_data:
+    external: true
+    name: ${KAFKA_DATA_VOL}

@@ -1,0 +1,13 @@
+MCDRT: "devcd-runtime/runtime"
+FEATURECD: "demo"
+
+kafview:
+  image: siva443/java:17-corr-alpine
+  replicas: 1
+  memory: 1Gi
+  imagePullPolicy: Never
+  kafka:
+    brokerConnect: kafka:9092
+  ports:
+    svcPort: 9000
+    containerPort: 9000

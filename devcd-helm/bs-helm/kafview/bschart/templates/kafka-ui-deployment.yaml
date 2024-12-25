@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-ui"
+spec:
+  replicas: {{ .Values.kafview.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}-ui"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}-ui"
+    spec:
+      containers:
+      - name: kafview
+        image: {{ .Values.kafview.image }}
+        resources:
+          limits:
+            memory: {{ .Values.kafview.memory }}
+        ports:
+        - containerPort: {{ .Values.kafview.ports.containerPort }}
+        workingDir: /app
+        command: ["java", "-jar", "/app/kafview.jar"]  
+        volumeMounts:
+        - name: app-volume
+          mountPath: /app/kafview.jar
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: "{{ .Values.CWD }}/{{ .Values.MCDRT }}/kafview-1.0.0.jar"

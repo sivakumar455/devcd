@@ -1,0 +1,15 @@
+
+runtime:
+  image: couchbase
+  imagePullPolicy: Always
+  resources:
+    requests:
+      memory: 750M  
+    limits:
+      memory: 3G
+
+couchbase:
+  replicas: 1
+  data:
+    capacity: 3Gi
+    path: devcd-helm/bs-helm/couchbase/couchbase-data-pv

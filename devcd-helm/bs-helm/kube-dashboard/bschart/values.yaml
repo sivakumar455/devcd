@@ -1,0 +1,10 @@
+dashboard:
+  resources:
+    requests:
+      memory: 100M  
+    limits:
+      memory: 500M
+  dashboard-metrics-scraper: 
+    image: 'kubernetesui/metrics-scraper:latest'
+  kubernetes-dashboard:
+    image: 'kubernetesui/dashboard:latest'

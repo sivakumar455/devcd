@@ -1,0 +1,38 @@
+
+kafka:
+  image: bitnami/kafka
+  replicas: 1
+  imagePullPolicy: Always
+  ports:
+    svcPort: 9092 
+    containerPort: 9092
+    svcIntPort: 29092
+    containerIntPort: 29092
+  resources:
+    requests:
+      memory: 750M  
+    limits:
+      memory: 3G
+
+  zookeeper:
+    connect: zookeeper:2181
+  data:
+    capacity: 5Gi
+    path: devcd-helm/bs-helm/kafka/kafka-data-pv
+
+
+zookeeper:
+  image: bitnami/zookeeper
+  serviceName: zookeeper
+  replicas: 1
+  imagePullPolicy: Always
+  resources:
+    requests:
+      memory: 250M  
+    limits:
+      memory: 500M 
+  ports:
+    svcPort: 2181
+    containerPort: 2181  
+  data:
+    capacity: 5Gi

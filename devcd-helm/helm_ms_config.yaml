@@ -1,0 +1,21 @@
+helmBs:
+  - "/kafka/bschart"
+  - "/couchbase/bschart"
+  - "/kube-dashboard/bschart"
+
+helmMs:
+  - "/order-service/mschart"
+  - "/product-service/mschart"
+  - "/user-service/mschart"
+
+helmTestBs:
+  - "/kube-dashboard/bschart"
+  
+helmTestMs:
+  - "/user-service/mschart"
+
+valuesBs:
+  - "/bs_global_values.yaml"
+
+valuesMs:
+  - "/ms_global_values.yaml"

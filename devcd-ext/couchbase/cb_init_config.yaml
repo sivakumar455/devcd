@@ -1,0 +1,39 @@
+
+clusterInfo:
+  clusterName: eMarket
+  storageMode: plasma
+  username: Administrator
+  password: Administrator
+  port: SAME
+  memoryQuota: 3020
+  indexMemoryQuota: 512
+  baseUrl: http://127.0.0.1:8091
+  services: kv,n1ql,index,fts
+
+bucketInfo:
+  - name: b1_orders
+    type: couchbase
+    scope:
+      - name: s1_orders
+        collection:
+          - name: orders
+            index:
+              - "CREATE PRIMARY INDEX  ON `b1_order`.`s1_order`.`orders`"
+
+  - name: b1_users
+    type: couchbase 
+    scope:
+      - name: s1_users
+        collection:
+          - name: users
+            index:
+              - "CREATE PRIMARY INDEX  ON `b1_users`.`s1_users`.`users`"
+
+  - name: CB1_archive
+    type: couchbase
+    scope:
+      - name: pay
+        collection:
+          - name: payment
+            index:
+         

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: kube-dashboard
+description: A Helm chart for Kubernetes dashboard
+version: 1.0.0

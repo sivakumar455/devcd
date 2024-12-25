@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "{{ .Release.Name }}-ui"
+spec:
+  selector:
+    app: "{{ .Release.Name }}-ui"
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: {{ .Values.kafview.ports.svcPort }}
+    targetPort: {{ .Values.kafview.ports.containerPort }}

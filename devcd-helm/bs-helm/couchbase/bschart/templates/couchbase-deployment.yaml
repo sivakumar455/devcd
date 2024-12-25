@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.couchbase.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.runtime.image }}
+        imagePullPolicy: {{ .Values.runtime.imagePullPolicy }}
+        resources:
+          requests:
+            memory: {{ .Values.runtime.resources.requests.memory }}        
+          limits:
+            memory: {{ .Values.runtime.resources.limits.memory }}
+        ports:
+        - containerPort: 8091
+        - containerPort: 8092
+        - containerPort: 8093
+        - containerPort: 8094
+        - containerPort: 8095
+        - containerPort: 8096
+        - containerPort: 11210
+        - containerPort: 11211
+        volumeMounts:
+        - mountPath: /opt/couchbase/var
+          name: couchbase-data
+      volumes:
+      - name: couchbase-data
+        hostPath:
+          path:  "{{ .Values.CWD }}/{{ .Values.couchbase.data.path }}"

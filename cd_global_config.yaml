@@ -1,0 +1,4 @@
+
+# Installation ENV
+CONTAINER_RT_ENGINE: 'docker' # docker/podman
+RUN_MODE: 'helm' # helm/compose

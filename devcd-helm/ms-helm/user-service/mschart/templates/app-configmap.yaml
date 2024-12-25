@@ -1,0 +1,38 @@
+kind: "ConfigMap"
+apiVersion: "v1"
+metadata:
+  name: app-{{ .Values.ms.name }}
+data:
+  application.yaml: |
+    server:
+      port: 8443
+    management:
+      server:
+        port: 8081      
+
+    spring:
+      cloud:
+        stream:
+          kafka:
+            binder:
+              headers:
+                - "X-B3-TraceId"
+                - "X-B3-SpanId"
+                - "X-B3-Sampled"
+                - "X-B3-ParentSpanId"         
+              brokers: kafka:9092
+              zkNodes: zookeeper:2181
+            bindings:     
+          enabled: true
+          bindings:       
+      zipkin:
+        enabled: false
+
+
+    logging:
+      level:
+        org:
+          apache:
+            http:
+              wire: WARN
+            kafka: WARN

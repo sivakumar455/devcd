@@ -1,0 +1,4 @@
+apiVersion: v2
+name: couchbase
+description: A Helm chart for Couchbase
+version: 1.0.0

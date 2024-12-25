@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  order-service:
+    image: order-service-ms
+    container_name: order-service-ms
+    mem_limit: 1G
+    ports:
+      - "41234:8443"
+    env_file:
+      - ${ENV_VARS}/env_vars.txt
+    environment:
+      - "SPRING_CLOUD_STREAM_ENABLED=true"
+      
+    networks:
+      - ms-net
+    volumes:
+      - ${MS_LOGS}/order-service-ms:/app/logs
+      - ${MS_CONFIG}/order-service-ms.yaml:/app/core-ms.yaml
+networks:
+  ms-net:
+    external: true
+    name: ${MS_NET}

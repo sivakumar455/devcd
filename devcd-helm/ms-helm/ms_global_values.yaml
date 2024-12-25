@@ -1,0 +1,12 @@
+CWD: /devkube
+volumes:
+  runtime: "devcd-runtime/runtime"
+  logs: "devcd-runtime/logs"
+
+containers:
+  imagePullPolicy: Never
+  javabaseimage: siva443/java:17-corr-alpine
+
+image:
+  order-service:
+    version: 0.0.1

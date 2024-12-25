@@ -1,0 +1,16 @@
+# MS Config
+MS_CONFIG: "."
+ENV_VARS: "../../../devcd-compose"
+MS_LOGS: "../../../devcd-runtime/logs"
+MS_IMG_RT: "../../../devcd-runtime/runtime"
+TMP_NXS_REPO: "./devcd-runtime/nexus-repo"
+
+# Docker Volumes and networks
+FEATURE_CD: demo
+ZOO_DATA_VOL: 'zookeeper_data_demo'
+KAFKA_DATA_VOL: 'kafka_data_demo'
+CB_DATA_VOL: 'couchbase_data_demo'
+MS_NET: 'ms-net-demo'
+
+MEM_SZ_SMALL: '1600M'
+MEM_SZ_MEDIUM: '2G'

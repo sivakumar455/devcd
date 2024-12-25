@@ -1,0 +1,11 @@
+
+ms:
+  name: user-service
+  exeName: user-service
+  
+containers:
+  resources:
+    requests:
+      memory: 200M
+    limits:
+      memory: 1G
