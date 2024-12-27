@@ -140,7 +140,7 @@ func PostAppUrlEncode(cbUrl string, data url.Values, auth bool) (*http.Response,
 	// }
 
 	// fmt.Printf("\nREQUEST:\n%s\n", string(reqDump))
-
+	logger.Debug("Request for index:", "request", req)
 	resp, err := client.Do(req)
 	if err != nil {
 		logger.Error("Error sending request to server:", "error", err)

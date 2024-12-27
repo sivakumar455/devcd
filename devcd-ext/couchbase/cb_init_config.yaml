@@ -18,7 +18,7 @@ bucketInfo:
         collection:
           - name: orders
             index:
-              - "CREATE PRIMARY INDEX  ON `b1_order`.`s1_order`.`orders`"
+              - "CREATE PRIMARY INDEX  ON `b1_orders`.`s1_orders`.`orders`"
 
   - name: b1_users
     type: couchbase 
