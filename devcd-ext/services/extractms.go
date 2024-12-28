@@ -12,11 +12,9 @@ import (
 
 var msTestVer = os.Getenv("MS1_VER")
 
-func ExtractMsMain() {
-	extractMs()
-}
+type DefaultExtractms struct{}
 
-func extractMs() {
+func (ms DefaultExtractms) Extract() {
 	tmpDir := os.Getenv("TMP_NXS_REPO")
 	tmpFolder := "ms_img"
 	err := utils.CreateTmpDirWithTS(tmpDir, tmpFolder)

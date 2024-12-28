@@ -9,23 +9,6 @@ import (
 	"os"
 )
 
-func InstallFulldevc() {
-
-	logger.Info("###############################################")
-	logger.Info("devcd installation STARTED")
-	logger.Info("################################################")
-
-	InstallJavaImage()
-	CreateVolumesAndNetworks()
-	//CreateCbCluster()
-
-	//ExtractMsJars()
-
-	logger.Info("#################################################")
-	logger.Info("devcd installation COMPLETED")
-	logger.Info("#################################################")
-}
-
 func InstallJavaImage() {
 	CheckContainerRtEngine()
 	BuildJavaImage()
@@ -106,9 +89,4 @@ func CreateCbCluster() {
 	utils.RemoveContainer(config.ContainerEngine, cbContainerName)
 
 	logger.Info("CB Cluster Creation completed...")
-}
-
-func ExtractMsJars() {
-	logger.Info("Extracting all MS jars")
-	ExtractMsMain()
 }

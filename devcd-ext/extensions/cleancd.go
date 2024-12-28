@@ -1,4 +1,4 @@
-package services
+package extensions
 
 import (
 	"devcd/config"

@@ -5,7 +5,7 @@ package install
 
 import (
 	"devcd/logger"
-	"devcd_ext/services"
+	"devcd_ext/extensions"
 
 	"github.com/spf13/cobra"
 )
@@ -17,7 +17,7 @@ var cdCmd = &cobra.Command{
 	Long:  `Install full devc`,
 	Run: func(cmd *cobra.Command, args []string) {
 		logger.Debug("cd called")
-		services.InstallFulldevc()
+		extensions.InstallFulldevc()
 	},
 }
 
