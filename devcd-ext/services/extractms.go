@@ -11,6 +11,8 @@ import (
 )
 
 var msTestVer = os.Getenv("MS1_VER")
+var TMP_DIR string
+var RT_DIR string
 
 type DefaultExtractms struct{}
 
@@ -21,7 +23,10 @@ func (ms DefaultExtractms) Extract() {
 	if err != nil {
 		logger.Error("Err creating temp dir", "tmpDir", tmpDir)
 	}
-	os.Chdir(tmpDir)
+
+	rootDir, _ := utils.GetCwd()
+	RT_DIR = filepath.Join(rootDir, "devcd-runtime", "runtime")
+
 	extractAllMs()
 	copyToRuntime()
 
@@ -44,7 +49,7 @@ func extractMsImg(msName, msVersion string) {
 	msExePath := fmt.Sprintf("/deploy/%s", msExeJar)
 	msImg := fmt.Sprintf("%s/%s:%s", "MS_REPO", msService, msVersion)
 	if !chkRuntimeJarExists(msExeJar) {
-		utils.ExtractMSFromDocker(config.CONTAINER_RTE, msImg, msExePath)
+		utils.ExtractMSFromDocker(config.CONTAINER_RTE, msImg, msExePath, RT_DIR)
 	}
 }
 

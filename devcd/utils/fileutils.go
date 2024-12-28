@@ -18,13 +18,29 @@ func CreateTmpDirWithTS(tmpDir, tmpFolder string) error {
 	if _, err := os.Stat(tempDir); os.IsNotExist(err) {
 		err := os.MkdirAll(tempDir, os.ModePerm)
 		if err != nil {
-			logger.Error("Error creating temporary directory", "error", err)
+			logger.Error("Error creating temporary directory", "tempDir", tempDir, "error", err)
 			return err
 		} else {
 			logger.Info("Created temporary directory", "tempDir", tempDir)
 		}
 	} else {
 		logger.Warn("Temporary directory already exists", "tempDir", tempDir)
+	}
+	return nil
+}
+
+func CreateTmpDir(tmpDir string) error {
+
+	if _, err := os.Stat(tmpDir); os.IsNotExist(err) {
+		err := os.MkdirAll(tmpDir, os.ModePerm)
+		if err != nil {
+			logger.Error("Error creating temporary directory", "tempDir", tmpDir, "error", err)
+			return err
+		} else {
+			logger.Info("Created temporary directory", "tempDir", tmpDir)
+		}
+	} else {
+		logger.Warn("Temporary directory already exists", "tempDir", tmpDir)
 	}
 	return nil
 }

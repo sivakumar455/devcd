@@ -94,7 +94,7 @@ func BuildDockerImageWithArg(containerRtEngine string, dockerImage string, docke
 	logger.Info("Container Runtime build ran successfully", "dockerImage", dockerImage)
 }
 
-func ExtractMSFromDocker(containerRtEngine, msImg, msExePath string) {
+func ExtractMSFromDocker(containerRtEngine, msImg, msExePath, destPath string) {
 
 	// Pull and extract
 	cmdPull := exec.Command(containerRtEngine, "pull", msImg)
@@ -114,7 +114,7 @@ func ExtractMSFromDocker(containerRtEngine, msImg, msExePath string) {
 	containerID := strings.TrimSpace(string(containerIDOutput))
 	logger.Debug(fmt.Sprintf("containerID: %s", containerID))
 
-	cmdCopy := exec.Command(containerRtEngine, "cp", fmt.Sprintf("%s:%s", containerID, msExePath), ".")
+	cmdCopy := exec.Command(containerRtEngine, "cp", fmt.Sprintf("%s:%s", containerID, msExePath), destPath)
 	cmdCopy.Stdout = os.Stdout
 	cmdCopy.Stderr = os.Stderr
 	if err := cmdCopy.Run(); err != nil {
@@ -188,7 +188,7 @@ func ExtractMSFromDockerToPath(containerRtEngine, msImg, msExePath, destPath str
 	}
 }
 
-func ExtractMSFromDockerLocal(containerRtEngine, msImg, msExePath string) {
+func ExtractMSFromDockerLocal(containerRtEngine, msImg, msExePath, destPath string) {
 
 	containerIDCmd := exec.Command(containerRtEngine, "create", msImg, "bin/bash")
 	containerIDOutput, err := containerIDCmd.Output()
@@ -199,7 +199,7 @@ func ExtractMSFromDockerLocal(containerRtEngine, msImg, msExePath string) {
 	containerID := strings.TrimSpace(string(containerIDOutput))
 	logger.Debug(fmt.Sprintf("containerID: %s", containerID))
 
-	cmdCopy := exec.Command(containerRtEngine, "cp", fmt.Sprintf("%s:%s", containerID, msExePath), ".")
+	cmdCopy := exec.Command(containerRtEngine, "cp", fmt.Sprintf("%s:%s", containerID, msExePath), destPath)
 	cmdCopy.Stdout = os.Stdout
 	cmdCopy.Stderr = os.Stderr
 	if err := cmdCopy.Run(); err != nil {

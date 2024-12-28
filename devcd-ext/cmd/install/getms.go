@@ -17,7 +17,7 @@ var getmsCmd = &cobra.Command{
 	Long:  `to extract ms jars and save it under runtime`,
 	Run: func(cmd *cobra.Command, args []string) {
 		logger.Debug("getms called")
-		extensions.NewExtractMs()
+		extensions.NewExtractMs().Extract()
 	},
 }
 
