@@ -12,7 +12,7 @@ kafka:
     requests:
       memory: 750M  
     limits:
-      memory: 3G
+      memory: 2G
 
   zookeeper:
     connect: zookeeper:2181
@@ -30,7 +30,7 @@ zookeeper:
     requests:
       memory: 250M  
     limits:
-      memory: 500M 
+      memory: 400M 
   ports:
     svcPort: 2181
     containerPort: 2181  
