@@ -8,4 +8,4 @@ containers:
     requests:
       memory: 200M  
     limits:
-      memory: 1G
+      memory: 500M

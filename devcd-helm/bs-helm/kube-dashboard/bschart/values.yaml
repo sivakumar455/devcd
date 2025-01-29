@@ -1,9 +1,11 @@
 dashboard:
+  token:
+    ttl: 36000 # set ttl to 10 hrs ( 36000 seconds )
   resources:
     requests:
       memory: 100M  
     limits:
-      memory: 500M
+      memory: 300M
   dashboard-metrics-scraper: 
     image: 'kubernetesui/metrics-scraper:latest'
   kubernetes-dashboard:
