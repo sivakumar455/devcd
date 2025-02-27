@@ -4,6 +4,7 @@ ms:
   exeName: product-service
   
 containers:
+  image: "siva443/product-service-ms"
   resources:
     requests:
       memory: 200M  

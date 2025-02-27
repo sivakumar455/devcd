@@ -4,6 +4,7 @@ ms:
   exeName: order-service
   
 containers:
+  image: "siva443/order-service-ms"
   resources:
     requests:
       memory: 200M
