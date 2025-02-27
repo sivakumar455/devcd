@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        image: "{{ .Values.ms.name }}-ms"
+        image: "{{ .Values.containers.image }}"
         imagePullPolicy: {{ .Values.containers.imagePullPolicy }}
         resources:
           requests:
