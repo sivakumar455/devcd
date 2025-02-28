@@ -1,1 +1,4 @@
 CWD: /devkube
+volumes:
+  runtime: "devcd-runtime/runtime"
+  logs: "devcd-runtime/logs"

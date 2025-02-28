@@ -2,6 +2,8 @@ helmBs:
   - "/kafka/bschart"
   - "/couchbase/bschart"
   - "/kube-dashboard/bschart"
+  - "/otel-collector/bschart"
+  - "/jaeger/bschart"
 
 helmMs:
   - "/order-service/mschart"
@@ -9,7 +11,9 @@ helmMs:
   - "/user-service/mschart"
 
 helmTestBs:
-  - "/kube-dashboard/bschart"
+  # - "/kube-dashboard/bschart"
+  - "/otel-collector/bschart"
+  - "/jaeger/bschart"
   
 helmTestMs:
   - "/user-service/mschart"

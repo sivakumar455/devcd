@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.ms.name }}-service"
+spec:
+  type: NodePort
+  ports:
+    - port: 16686
+      name: query-ui
+      nodePort: 30686  
+    - port: 14250
+      name: grpc
+    - port: 14268
+      name: http      
+    - port: 6831
+      name: jaeger-udp
+    - port: 6832
+      name: jaeger-udp2
+    - port: 4317
+      name: jaeger-grpc
+    - port: 4318
+      name: jaeger-http      
+    - port: 9411
+      name: zipkin
+
+  selector:
+    app: {{ .Values.ms.name }}

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ms.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.ms.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ms.name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.containers.image }}
+        imagePullPolicy: {{ .Values.containers.imagePullPolicy }}
+        resources:
+          requests:
+            memory: {{ .Values.containers.resources.requests.memory }}          
+          limits:
+            memory: {{ .Values.containers.resources.limits.memory }}
+
+        ports:
+          - containerPort: 16686
+            name: query-ui        
+          - containerPort: 14250
+            name: grpc
+          - containerPort: 14268
+            name: http
+          - containerPort: 4317
+            name: jaeger-grpc
+          - containerPort: 4318
+            name: jaeger-http            
+          - containerPort: 6831
+            name: jaeger-udp
+          - containerPort: 6832
+            name: jaeger-udp2
+        env:
+        - name: COLLECTOR_ZIPKIN_HTTP_HTTP_PORT
+          value: "9411"
+
+        volumeMounts:
+        - name: ms-logs-volume
+          mountPath: /app/logs
+        - name: app-{{ .Values.ms.name }}-volume
+          mountPath: /etc/otelcol-contrib/otel-collector.yml #/deployments/config/app-{{ .Values.ms.name }}          
+
+      volumes:
+      - name: ms-logs-volume
+        hostPath:
+          path: "{{ .Values.CWD }}/{{ .Values.volumes.logs }}/{{ .Values.ms.name }}"    
+      - name: app-{{ .Values.ms.name }}-volume
+        configMap:
+          name: app-{{ .Values.ms.name }}
+          defaultMode: 420
+
+   
