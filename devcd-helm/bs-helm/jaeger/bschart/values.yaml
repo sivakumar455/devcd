@@ -1,0 +1,12 @@
+
+ms:
+  name: jaeger
+  
+containers:
+  image: jaegertracing/all-in-one
+  imagePullPolicy: Always
+  resources:
+    requests:
+      memory: 100M  
+    limits:
+      memory: 200M

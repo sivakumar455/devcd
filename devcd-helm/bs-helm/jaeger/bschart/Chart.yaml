@@ -1,0 +1,4 @@
+apiVersion: v2
+name: jaeger-service
+description: A Helm chart for MS
+version: 1.0.0

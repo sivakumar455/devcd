@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ms.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.ms.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ms.name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.containers.image }}
+        imagePullPolicy: {{ .Values.containers.imagePullPolicy }}
+        resources:
+          requests:
+            memory: {{ .Values.containers.resources.requests.memory }}          
+          limits:
+            memory: {{ .Values.containers.resources.limits.memory }}
+
+        env:
+        - name: COLLECTOR_TEST_CONFIG
+          value: /etc/otelcol-contrib/otel-collector.yml
+        ports:
+          {{- $ports := deepCopy .Values.ports }}
+          {{- range $key, $port := $ports }}
+          {{- if $port.enabled }}
+        - name: {{ $key }}
+          containerPort: {{ $port.containerPort }}
+          protocol: {{ $port.protocol }}
+          {{- end }}
+          {{- end }}
+        volumeMounts:
+        - name: ms-logs-volume
+          mountPath: /app/logs
+        - name: app-{{ .Values.ms.name }}-volume
+          mountPath: /etc/otelcol-contrib #/deployments/config/app-{{ .Values.ms.name }}                    
+
+      volumes:
+      - name: ms-logs-volume
+        hostPath:
+          path: "{{ .Values.CWD }}/{{ .Values.volumes.logs }}/{{ .Values.ms.name }}"    
+      - name: app-{{ .Values.ms.name }}-volume
+        configMap:
+          name: app-{{ .Values.ms.name }}
+          defaultMode: 420
+
+   
