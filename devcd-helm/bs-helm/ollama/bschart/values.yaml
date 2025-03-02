@@ -1,0 +1,16 @@
+MCDRT: "devcd-runtime/runtime"
+FEATURECD: "demo"
+
+containers:
+  image: ollama/ollama
+  replicas: 1
+  memory: 6G
+  imagePullPolicy: IfNotPresent
+  ports:
+    svcPort: 11434
+    containerPort: 11434
+    nodePort: 30434
+
+ollama:
+  models:
+    path: /Users/siva/Siva/ai/models/ollama

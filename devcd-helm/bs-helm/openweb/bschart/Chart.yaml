@@ -1,0 +1,4 @@
+apiVersion: v2
+name: openweb
+description: A Helm chart for OpenWebUI
+version: 1.0.0

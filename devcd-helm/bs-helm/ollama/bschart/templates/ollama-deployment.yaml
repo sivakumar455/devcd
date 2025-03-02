@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.containers.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      containers:
+      - name: ollama
+        image: {{ .Values.containers.image }}
+        imagePullPolicy: {{ .Values.containers.imagePullPolicy }}
+        resources:
+          limits:
+            memory: {{ .Values.containers.memory }}
+        ports:
+        - containerPort: {{ .Values.containers.ports.containerPort }}
+        volumeMounts:
+        - name: models-volume
+          mountPath: /root/.ollama
+      volumes:
+      - name: models-volume
+        hostPath:
+          path: {{ .Values.ollama.models.path }}

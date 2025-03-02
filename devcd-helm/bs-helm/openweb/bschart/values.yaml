@@ -1,0 +1,20 @@
+MCDRT: "devcd-runtime/runtime"
+FEATURECD: "demo"
+
+containers:
+  image: ghcr.io/open-webui/open-webui:main
+  replicas: 1
+  memory: 1G
+  imagePullPolicy: IfNotPresent
+  ports:
+    svcPort: 8080
+    containerPort: 8080
+    nodePort: 30435
+
+volumes:
+  openweb:
+    path: devcd-helm/bs-helm/openweb/openweb-data
+
+ollama:
+  baseUrl: http://host.docker.internal:30434
+    

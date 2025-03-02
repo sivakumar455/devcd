@@ -5,7 +5,7 @@ ms:
   
 containers:
   image: otel/opentelemetry-collector-contrib
-  imagePullPolicy: Never
+  imagePullPolicy: IfNotPresent
   resources:
     requests:
       memory: 50M  

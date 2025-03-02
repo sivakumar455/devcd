@@ -14,5 +14,7 @@ devcd-helm/bs-helm/couchbase/couchbase-data-pv/*
 !devcd-helm/bs-helm/couchbase/couchbase-data-pv/.gitkeep
 devcd-helm/bs-helm/kafka/kafka-data-pv/*
 !devcd-helm/bs-helm/kafka/kafka-data-pv/.gitkeep
+devcd-helm/bs-helm/openweb/openweb-data/*
+!devcd-helm/bs-helm/couchbase/openweb-data/.gitkeep
 
 /devc

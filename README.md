@@ -116,3 +116,11 @@ https://github.com/sivakumar455/e-market
 
 ```
 
+```bash
+# ollama rest api call
+curl http://localhost:30434/api/generate -d '{         "model": "deepseek-r1:1.5b",                                "prompt":"Why is the sky blue?",
+"stream": false
+}' 
+
+```
+

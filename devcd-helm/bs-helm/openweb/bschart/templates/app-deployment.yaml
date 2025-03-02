@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.containers.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}"
+    spec:
+      containers:
+      - name: openweb
+        image: {{ .Values.containers.image }}
+        imagePullPolicy: {{ .Values.containers.imagePullPolicy }}
+        resources:
+          limits:
+            memory: {{ .Values.containers.memory }}
+        env:
+        - name: OLLAMA_BASE_URL
+          value: {{ .Values.ollama.baseUrl }}
+        ports:
+        - containerPort: {{ .Values.containers.ports.containerPort }}
+        volumeMounts:
+        - name: app-volume
+          mountPath: /app/backend/data 
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: {{ .Values.CWD }}/{{ .Values.volumes.openweb.path }}
