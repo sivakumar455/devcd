@@ -4,7 +4,7 @@ FEATURECD: "demo"
 containers:
   image: ollama/ollama
   replicas: 1
-  memory: 6G
+  memory: 9G
   imagePullPolicy: IfNotPresent
   ports:
     svcPort: 11434

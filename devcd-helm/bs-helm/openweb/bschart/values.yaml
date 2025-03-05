@@ -4,7 +4,7 @@ FEATURECD: "demo"
 containers:
   image: ghcr.io/open-webui/open-webui:main
   replicas: 1
-  memory: 1G
+  memory: 1.5G
   imagePullPolicy: IfNotPresent
   ports:
     svcPort: 8080
