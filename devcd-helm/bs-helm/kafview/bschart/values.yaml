@@ -5,7 +5,7 @@ kafview:
   image: siva443/java:17-corr-alpine
   replicas: 1
   memory: 1Gi
-  imagePullPolicy: Never
+  imagePullPolicy: IfNotPresent
   kafka:
     brokerConnect: kafka:9092
   ports:

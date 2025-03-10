@@ -4,6 +4,8 @@ helmBs:
   - "/kube-dashboard/bschart"
   - "/otel-collector/bschart"
   - "/jaeger/bschart"
+  # - "/ollama/bschart"
+  # - "/openweb/bschart"  
 
 helmMs:
   - "/order-service/mschart"
@@ -11,9 +13,11 @@ helmMs:
   - "/user-service/mschart"
 
 helmTestBs:
-  - "/kube-dashboard/bschart"
-  - "/ollama/bschart"
-  - "/openweb/bschart"
+  # - "/kube-dashboard/bschart"
+  # - "/ollama/bschart"
+  # - "/openweb/bschart"
+  - "/kafka/bschart"
+
   
 helmTestMs:
   - "/user-service/mschart"

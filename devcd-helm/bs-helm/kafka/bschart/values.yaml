@@ -2,12 +2,13 @@
 kafka:
   image: bitnami/kafka
   replicas: 1
-  imagePullPolicy: Always
+  imagePullPolicy: IfNotPresent
   ports:
     svcPort: 9092 
     containerPort: 9092
     svcIntPort: 29092
     containerIntPort: 29092
+    nodePort: 30092
   resources:
     requests:
       memory: 750M  
@@ -25,7 +26,7 @@ zookeeper:
   image: bitnami/zookeeper
   serviceName: zookeeper
   replicas: 1
-  imagePullPolicy: Always
+  imagePullPolicy: IfNotPresent
   resources:
     requests:
       memory: 250M  

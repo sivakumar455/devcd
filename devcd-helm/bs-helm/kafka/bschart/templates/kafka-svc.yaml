@@ -3,11 +3,15 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
   - name: port-9092
     port: {{ .Values.kafka.ports.svcPort }}
-    targetPort: {{ .Values.kafka.ports.containerPort }}   
+    targetPort: {{ .Values.kafka.ports.containerPort }}
+  - name: port-30092
+    port: {{ .Values.kafka.ports.nodePort }}
+    targetPort: {{ .Values.kafka.ports.nodePort }}
+    nodePort: {{ .Values.kafka.ports.nodePort }}    
 
   selector:
     app: {{ .Release.Name }}
