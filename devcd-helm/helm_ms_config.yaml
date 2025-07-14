@@ -13,7 +13,7 @@ helmMs:
   - "/user-service/mschart"
 
 helmTestBs:
-  # - "/kube-dashboard/bschart"
+  - "/kube-dashboard/bschart"
   # - "/ollama/bschart"
   # - "/openweb/bschart"
   - "/kafka/bschart"

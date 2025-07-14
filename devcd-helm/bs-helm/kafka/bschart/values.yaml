@@ -3,6 +3,7 @@ kafka:
   image: bitnami/kafka
   replicas: 1
   imagePullPolicy: IfNotPresent
+  externalHost: localhost #host.docker.internal
   ports:
     svcPort: 9092 
     containerPort: 9092
