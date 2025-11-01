@@ -1,3 +1,4 @@
+{{- if .Values.zookeeper.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,14 +23,17 @@ spec:
           limits:
             memory: {{ .Values.zookeeper.resources.limits.memory }}        
         env:
-        - name: ALLOW_ANONYMOUS_LOGIN
-          value: "yes"
+        - name: ZOOKEEPER_CLIENT_PORT
+          value: "{{ .Values.zookeeper.ports.containerPort }}"
+        - name: ZOOKEEPER_TICK_TIME
+          value: "2000"
         volumeMounts:
         - name: zookeeper-data
-          mountPath: /bitnami
+          mountPath: /var/lib/zookeeper/data
         ports:
         - containerPort: {{ .Values.zookeeper.ports.containerPort }}          
       volumes:
       - name: zookeeper-data
         hostPath:
-          path: "{{ .Values.CWD }}/{{ .Values.kafka.data.path }}"       
+          path: "{{ .Values.CWD }}/{{ .Values.zookeeper.data.path }}"
+{{- end }}
