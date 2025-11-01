@@ -1,28 +1,35 @@
-
 kafka:
-  image: bitnami/kafka
+  image: apache/kafka:4.1.0
   replicas: 1
-  imagePullPolicy: Always
+  imagePullPolicy: IfNotPresent
+  serviceName: kafka
+  externalHost: localhost  # For Docker Desktop; use actual hostname/IP for remote access
+  nodeId: 1
   ports:
-    svcPort: 9092 
+    svcPort: 9092          # Internal K8s port
     containerPort: 9092
-    svcIntPort: 29092
-    containerIntPort: 29092
+    controllerSvcPort: 9093
+    controllerPort: 9093
+    externalPort: 9094     # External localhost port
   resources:
     requests:
       memory: 750M  
     limits:
       memory: 2G
-
-  zookeeper:
-    connect: zookeeper:2181
+  # KRaft mode configuration (no ZooKeeper needed)
+  offsetsTopicReplicationFactor: 1
+  transactionStateLogReplicationFactor: 1
+  transactionStateLogMinIsr: 1
+  groupInitialRebalanceDelayMs: 0
+  numPartitions: 3
   data:
     capacity: 5Gi
     path: devcd-helm/bs-helm/kafka/kafka-data-pv
 
 
 zookeeper:
-  image: bitnami/zookeeper
+  enabled: false  # Set to true if you need ZooKeeper (legacy mode), false for KRaft mode
+  image: confluentinc/cp-zookeeper:latest
   serviceName: zookeeper
   replicas: 1
   imagePullPolicy: Always
@@ -36,3 +43,4 @@ zookeeper:
     containerPort: 2181  
   data:
     capacity: 5Gi
+    path: devcd-helm/bs-helm/kafka/zookeeper-data-pv

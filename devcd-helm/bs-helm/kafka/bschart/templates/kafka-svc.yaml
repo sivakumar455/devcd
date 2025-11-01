@@ -1,13 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Values.kafka.serviceName | default .Release.Name }}
 spec:
   type: LoadBalancer
   ports:
-  - name: port-9092
+  - name: plaintext
     port: {{ .Values.kafka.ports.svcPort }}
     targetPort: {{ .Values.kafka.ports.containerPort }}   
-
+  - name: controller
+    port: {{ .Values.kafka.ports.controllerSvcPort }}
+    targetPort: {{ .Values.kafka.ports.controllerPort }}
+  - name: external
+    port: {{ .Values.kafka.ports.externalPort }}
+    targetPort: {{ .Values.kafka.ports.externalPort }}
   selector:
     app: {{ .Release.Name }}
